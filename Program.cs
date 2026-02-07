@@ -2,8 +2,8 @@
 using Microsoft.VisualBasic.FileIO;
 
 OddiyBolim oddiyAmal = new OddiyBolim();
-ProBolim proAmal = new ProBolim();
 Printer printer = new Printer();
+ProBolim proAmal = new ProBolim(printer);
 
 printer.PrintLine("<<  Assalomu alayukum SuperCalculator dasturiga hush kelibsiz  >>\n");
 

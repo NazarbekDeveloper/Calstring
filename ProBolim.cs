@@ -4,7 +4,11 @@ namespace Calstring
 {
     public class ProBolim
     {
-        Printer printer = new Printer();
+        Printer printer;
+        public ProBolim(Printer printer)
+        {
+            this.printer = printer;
+        }
         public void DarajagaKotar()
         {
             printer.Print("LET'S GO!!! a ning b darajasini hisoblaymiz \n");
