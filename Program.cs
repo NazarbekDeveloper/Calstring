@@ -1,118 +1,57 @@
-﻿using Microsoft.VisualBasic.FileIO;
+﻿using Calstring;
+using Microsoft.VisualBasic.FileIO;
 
-Console.WriteLine("<<  Assalomu alayukum SuperCalculator dasturiga hush kelibsiz  >>\n");
+OddiyBolim oddiyAmal = new OddiyBolim();
+ProBolim proAmal = new ProBolim();
+Printer printer = new Printer();
+
+printer.PrintLine("<<  Assalomu alayukum SuperCalculator dasturiga hush kelibsiz  >>\n");
+
 int qaytaIshlat;
 do
 {
-    Console.WriteLine("Bizning dasturimizda 2 ta bo'lim mavjud: ");
-    Console.WriteLine("1. Oddiy bo'lim              2. Pro bo'lim");
-    Console.WriteLine("1) qo'shish (+)              1) darajaga");
-    Console.WriteLine("2) ayirish  (-)              2) kvadrat ildiz");
-    Console.WriteLine("3) ko'paytirish  (*)         3) logarifm");
-    Console.WriteLine("4) bo'lish  (/)              4) faktorial\n");
-    Console.Write("Bo'limni tanlang >> ");
-    int bolimTanla = int.Parse(Console.ReadLine());
-    Console.WriteLine();
+    printer.PrintLine("Bizning dasturimizda 2 ta bo'lim mavjud: ");
+    printer.PrintLine("1. Oddiy bo'lim              2. Pro bo'lim");
+    printer.PrintLine("1) qo'shish (+)              1) darajaga");
+    printer.PrintLine("2) ayirish  (-)              2) kvadrat ildiz");
+    printer.PrintLine("3) ko'paytirish  (*)         3) logarifm");
+    printer.PrintLine("4) bo'lish  (/)              4) faktorial\n");
+    printer.Print("Bo'limni tanlang >> ");
+    int bolimTanla = int.Parse(Reader.ReadFromConsole());
+    printer.PrintLine();
     if (bolimTanla == 1)
     {
-        OddiyAmallarBajar();
+        oddiyAmal.Hisobla();
     }
     else if (bolimTanla == 2)
     {
-        Console.WriteLine("Pro bo'limimizga xush kelibsiz!!!\n");
-        Console.WriteLine("Qanday amal bajaramiz..? \n1.Darajaga ko'tarish\n2.Kvadrat ildiz topish\n3.Logarifm hisoblash\n4.Faktorial hisoblash\n");
-        Console.Write(">>> ");
-        int amal = int.Parse(Console.ReadLine());
+        printer.PrintLine("Pro bo'limimizga xush kelibsiz!!!\n");
+        printer.PrintLine("Qanday amal bajaramiz..? \n1.Darajaga ko'tarish\n2.Kvadrat ildiz topish\n3.Logarifm hisoblash\n4.Faktorial hisoblash\n");
+        printer.Print(">>> ");
+        int amal = int.Parse(Reader.ReadFromConsole());
         if (amal == 1)
         {
-            DarajagaKotar();
+            proAmal.DarajagaKotar();
         }
         else if (amal == 2)
         {
-            IldizTop();
+           proAmal.IldizTop();
         }
         else if (amal == 3)
         {
-            LogarifmHisobla();
+            proAmal.LogarifmHisobla();
         }
         else if (amal == 4)
         {
-            FaktorialHisobla();
+            proAmal.FaktorialHisobla();
         }
-        else Console.WriteLine("Bunday amal xattoki PRO Max calculyatorda ham yo'qku bratim...!!!");
+        else printer.PrintLine("Bunday amal xattoki PRO Max calculyatorda ham yo'qku bratim...!!!");
     }
     else
     {
-        System.Console.WriteLine("Bunaqa bo'lim yo'de oka. Keyingi safar qo'shib qo'yamiza..!!!");
+        printer.PrintLine("Bunaqa bo'lim yo'de oka. Keyingi safar qo'shib qo'yamiza..!!!");
     }
-    Console.WriteLine("Qaytadan bosvorovuzami oka?(1.ha 0.yo'q)");
-    qaytaIshlat = int.Parse(Console.ReadLine());
+    printer.PrintLine("Qaytadan bosvorovuzami oka?(1.ha 0.yo'q)");
+    qaytaIshlat = int.Parse(Reader.ReadFromConsole());
 } while (qaytaIshlat == 1);
-Console.WriteLine("SuperCalculyator dasturidan foydalanganiz uchun Thank You Bro...!!!");
-
-static void OddiyAmallarBajar()
-{
-    Console.Write("birinchi son: a = ");
-    double a = double.Parse(Console.ReadLine());
-
-    Console.Write("amalni kiriting(+ , - , * , /): >> ");
-    char amal = char.Parse(Console.ReadLine());
-    Console.Write("ikkinchi son: b = ");
-    double b = double.Parse(Console.ReadLine());
-    if (amal == '+') Console.WriteLine($"{a} {amal} {b} = {a + b}");
-    else if (amal == '-') Console.WriteLine($"{a} {amal} {b} = {a - b}");
-    else if (amal == '*') Console.WriteLine($"{a} {amal} {b} = {a * b}");
-    else if (amal == '/')
-    {
-        if (b == 0) Console.WriteLine("Sonni 0 ga bo'lsih mumkun emas");
-        else Console.WriteLine($"{a} {amal} {b} = {a / b}");
-    }
-    else Console.WriteLine("Bunday amal majud emas!!!");
-}
-static void DarajagaKotar()
-{
-    Console.Write("LET'S GO!!! a ning b darajasini hisoblaymiz \n");
-    Console.Write("a = ");
-    double a = double.Parse(Console.ReadLine());
-    Console.Write("b = ");
-    double b = double.Parse(Console.ReadLine());
-    Console.WriteLine($"{a}^{b} = {Math.Pow(a, b)}");
-}
-static void IldizTop()
-{
-    Console.Write("LET'S GO!!! a ning kvadrat ildizini topamiz\n");
-    Console.Write("a = ");
-    double a = double.Parse(Console.ReadLine());
-    if (a < 0) Console.WriteLine("Manfiy sonning kvadrat ildizini topish mumkun emas!!!");
-    Console.WriteLine($"{a} ning kvadrat ildizi {Math.Sqrt(a)} ga teng");
-}
-static void LogarifmHisobla()
-{
-    Console.Write("LET'S GO!!! Logarif a asosga ko'ra b ni hisoblaymiz \n");
-    Console.Write("a = ");
-    double a = double.Parse(Console.ReadLine());
-    Console.Write("b = ");
-    double b = double.Parse(Console.ReadLine());
-    if (a > 0 && a != 1 && b > 0) Console.WriteLine($"log {a} asosga ko'ra {b} ning natijasi {Math.Log(b) / Math.Log(a)} ga teng");
-    else Console.WriteLine("Siz xato son kiritdingiz!!!\na va b nomanfiy sonlar va (a != 1) bo'lishi kerak");
-}
-static void FaktorialHisobla()
-{
-    Console.Write("Qaysi sonning faktorialini hisoblaymiz..?\n a = ");
-    double a = double.Parse(Console.ReadLine());
-    double P = 1;
-    if (a < 0) Console.Write("Manfiy sonning faktorialini hisoblash mumkun emas!!!");
-    else
-    {
-        if (a == 0) Console.WriteLine("0! = 1");
-        else
-        {
-            for (int i = 1; i <= a; i++)
-            {
-                P *= i;
-            }
-            Console.WriteLine($"{a}! = {P}");
-        }
-
-    }
-}
+printer.PrintLine("SuperCalculyator dasturidan foydalanganiz uchun Thank You Bro...!!!");
